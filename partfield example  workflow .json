@@ -1,0 +1,538 @@
+{
+  "id": "c36b17e0-b2a7-4496-8d62-7455dce4b432",
+  "revision": 0,
+  "last_node_id": 90,
+  "last_link_id": 127,
+  "nodes": [
+    {
+      "id": 76,
+      "type": "PartFieldInference",
+      "pos": [
+        3607.896240234375,
+        2489.72607421875
+      ],
+      "size": [
+        315,
+        126
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "partfield_model",
+          "type": "PARTFIELD_MODEL",
+          "link": 127
+        },
+        {
+          "name": "mesh",
+          "type": "MESH",
+          "link": 115
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mesh",
+          "type": "MESH",
+          "links": [
+            116
+          ]
+        },
+        {
+          "name": "features",
+          "type": "FEATURES",
+          "links": [
+            117
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PartFieldInference"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 86,
+      "type": "PartFieldModelDownLoader",
+      "pos": [
+        2974.89794921875,
+        2433.645263671875
+      ],
+      "size": [
+        352.79998779296875,
+        82
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "PARTFIELD_MODEL",
+          "type": "PARTFIELD_MODEL",
+          "links": [
+            127
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PartFieldModelDownLoader"
+      },
+      "widgets_values": [
+        "Partfield.ckpt",
+        true
+      ]
+    },
+    {
+      "id": 88,
+      "type": "Note",
+      "pos": [
+        2984.888427734375,
+        2251.12890625
+      ],
+      "size": [
+        320.8339538574219,
+        111.13236236572266
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "this node downloads the model and creates a PartField folder in the comfyui models folder.\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 56,
+      "type": "TrimeshToMESH",
+      "pos": [
+        3315.599853515625,
+        2725.580810546875
+      ],
+      "size": [
+        208.86624145507812,
+        26
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "trimesh",
+          "type": "TRIMESH",
+          "link": 71
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MESH",
+          "type": "MESH",
+          "links": [
+            115
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-hunyan3dwrapper",
+        "ver": "c1f95d9a6e15ab5cf0bf301725c7849d4a6ee5f0",
+        "Node name for S&R": "TrimeshToMESH"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 89,
+      "type": "Note",
+      "pos": [
+        2823.01123046875,
+        2879.435302734375
+      ],
+      "size": [
+        320.8339538574219,
+        111.13236236572266
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "Load your mesh here\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 87,
+      "type": "Note",
+      "pos": [
+        4097.57958984375,
+        2321.468017578125
+      ],
+      "size": [
+        320.8339538574219,
+        111.13236236572266
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "num clusters=the number of parts to split the model into\n\ncluster method=agglomerative is deterministic and fast while kmeans is slower but tends to be better and can vary with seed.\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 77,
+      "type": "PartFieldSplitter",
+      "pos": [
+        4595.9873046875,
+        2704.537841796875
+      ],
+      "size": [
+        304.79998779296875,
+        26
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "colored_mesh",
+          "type": "TRIMESH",
+          "link": 118
+        }
+      ],
+      "outputs": [
+        {
+          "name": "part_meshes",
+          "type": "LIST_TRIMESH",
+          "links": [
+            119
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PartFieldSplitter"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 78,
+      "type": "PartFieldExportParts",
+      "pos": [
+        4929.21728515625,
+        2708.77685546875
+      ],
+      "size": [
+        455.7251281738281,
+        163.31056213378906
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "part_meshes",
+          "type": "LIST_TRIMESH",
+          "link": 119
+        }
+      ],
+      "outputs": [
+        {
+          "name": "exported_paths",
+          "type": "LIST_STRING",
+          "links": null
+        },
+        {
+          "name": "preview",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PartFieldExportParts"
+      },
+      "widgets_values": [
+        "Robot parts",
+        "partfield_part",
+        "ply"
+      ]
+    },
+    {
+      "id": 83,
+      "type": "PartFieldViewer",
+      "pos": [
+        4594.853515625,
+        2516.405517578125
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "colored_mesh",
+          "type": "TRIMESH",
+          "link": 122
+        }
+      ],
+      "outputs": [
+        {
+          "name": "preview",
+          "type": "IMAGE",
+          "links": [
+            126
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PartFieldViewer"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 84,
+      "type": "PreviewImage",
+      "pos": [
+        4957.54443359375,
+        2054.344970703125
+      ],
+      "size": [
+        597.3632202148438,
+        577.0726928710938
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 126
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.30",
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 66,
+      "type": "PartFieldClustering",
+      "pos": [
+        4090.259765625,
+        2515.379638671875
+      ],
+      "size": [
+        456,
+        222
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "MESH",
+          "link": 116
+        },
+        {
+          "name": "features",
+          "type": "FEATURES",
+          "link": 117
+        }
+      ],
+      "outputs": [
+        {
+          "name": "colored_mesh",
+          "type": "TRIMESH",
+          "links": [
+            118,
+            122
+          ]
+        },
+        {
+          "name": "preview",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PartFieldClustering"
+      },
+      "widgets_values": [
+        6,
+        "agglomerative",
+        "mst",
+        2,
+        true
+      ]
+    },
+    {
+      "id": 90,
+      "type": "Note",
+      "pos": [
+        4984.93994140625,
+        2929.08251953125
+      ],
+      "size": [
+        320.8339538574219,
+        111.13236236572266
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "Dont forget to name your output folder\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 54,
+      "type": "Hy3DUploadMesh",
+      "pos": [
+        2821.10009765625,
+        2740.55859375
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "trimesh",
+          "type": "TRIMESH",
+          "links": [
+            71
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-hunyan3dwrapper",
+        "ver": "c1f95d9a6e15ab5cf0bf301725c7849d4a6ee5f0",
+        "Node name for S&R": "Hy3DUploadMesh"
+      },
+      "widgets_values": [
+        "hunyuan output knight mesh.glb",
+        "image"
+      ]
+    }
+  ],
+  "links": [
+    [
+      71,
+      54,
+      0,
+      56,
+      0,
+      "TRIMESH"
+    ],
+    [
+      115,
+      56,
+      0,
+      76,
+      1,
+      "MESH"
+    ],
+    [
+      116,
+      76,
+      0,
+      66,
+      0,
+      "MESH"
+    ],
+    [
+      117,
+      76,
+      1,
+      66,
+      1,
+      "FEATURES"
+    ],
+    [
+      118,
+      66,
+      0,
+      77,
+      0,
+      "TRIMESH"
+    ],
+    [
+      119,
+      77,
+      0,
+      78,
+      0,
+      "LIST_TRIMESH"
+    ],
+    [
+      122,
+      66,
+      0,
+      83,
+      0,
+      "TRIMESH"
+    ],
+    [
+      126,
+      83,
+      0,
+      84,
+      0,
+      "IMAGE"
+    ],
+    [
+      127,
+      86,
+      0,
+      76,
+      0,
+      "PARTFIELD_MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.970227045707275,
+      "offset": [
+        -4191.022993123938,
+        -2087.7703590792944
+      ]
+    },
+    "frontendVersion": "1.17.11",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
