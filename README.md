@@ -191,7 +191,7 @@ See the LICENSE file for details.
 This project is based on NVIDIA's PartField model. Please see the original paper for more details:
 [PartField: Generalizable 3D Part Segmentation with Radiance Fields](https://nvlabs.github.io/partfield/) 
 
-example images
+## Example Images
 ![ComfyUI_temp_gxcby_00008_](https://github.com/user-attachments/assets/4e3fbe05-a452-47eb-950b-098b01daadd0)
 ![ComfyUI_temp_pyfcy_00001_](https://github.com/user-attachments/assets/368c7260-a3e7-4111-a454-43ffafd7756a)
 ![ComfyUI_temp_ptcms_00001_](https://github.com/user-attachments/assets/fb91a8fa-b23e-4136-bd92-1963024938b3)
