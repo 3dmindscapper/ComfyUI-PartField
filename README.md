@@ -61,7 +61,8 @@ The extension provides the following nodes:
   - `use_gpu`: Whether to use GPU for inference (if available).
 - Outputs:
   - `PARTFIELD_MODEL`: Dictionary containing the loaded model, device, and configuration.
-
+  - 
+-if you want to manually download the model here is the link: https://huggingface.co/mikaelaangel/partfield-ckpt/blob/main/model_objaverse.ckpt
 ### PartField Inference
 - Runs inference on a 3D mesh object to extract per-vertex part features.
 - Inputs:
