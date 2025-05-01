@@ -112,7 +112,7 @@ The extension provides the following nodes:
 - Outputs:
   - `preview`: Preview image tensor of the mesh (single or multi-view grid).
 
-##recomended settings 
+## Recomended settings
 
 -kmeans:
       Speed: Fast.
