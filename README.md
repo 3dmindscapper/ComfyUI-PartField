@@ -112,6 +112,36 @@ The extension provides the following nodes:
 - Outputs:
   - `preview`: Preview image tensor of the mesh (single or multi-view grid).
 
+##recomended settings 
+
+-kmeans:
+      Speed: Fast.
+      Quality: Groups faces based only on feature similarity. Ignores how faces are connected in the mesh.
+      Bleeding: Can work well if features are very distinct, but may easily bleed across nearby parts if features are similar, as it doesn't respect mesh topology.
+
+-agglomerative:
+      Speed: Slower than kmeans.
+      Quality: Considers both feature similarity and mesh connectivity (using adjacency_option). Generally better at respecting part boundaries.
+      Bleeding: Less likely to bleed across topological gaps than kmeans, effectiveness depends on adjacency_option.
+   
+ -adjacency_option ("naive" or "mst") (Only for agglomerative method):
+ 
+   -mst (Default):
+      Speed: Faster agglomerative option.
+      Quality: Connects the whole mesh using shared edges plus proximity links (MST). Allows merging based on features even if parts aren't directly edge-connected. Good balance.
+      Bleeding: Might still allow some bleeding between parts that are close together but don't share an edge, if their features are very similar.
+      
+   - naive:
+      Speed: Potentially VERY Slow, especially on complex meshes, even with low num_clusters.
+      Quality: Strictly requires faces to share an edge to be considered connected.
+      Bleeding: Best setting for preventing bleeding across topological gaps (parts not sharing edges). However, it won't stop bleeding between parts that do share edges along the bleed boundary. Can also lead to fragmented results if the mesh isn't perfectly connected       everywhere.
+   
+Recommended Strategy:
+Start: Use defaults (agglomerative, mst) with a moderate num_clusters (e.g., 15).
+If Bleeding Occurs: First, significantly increase num_clusters (e.g., 25, 40, 50+). This often solves it.
+If Bleeding Persists (Across Gaps): Switch to agglomerative + naive. Be prepared for much longer processing times.
+If Speed is Top Priority: Use kmeans, or stick with agglomerative + mst. You may need to accept some bleeding or rely heavily on a high num_clusters.
+Experimentation is often needed to find the best balance for your specific mesh!
 ## Example Workflow
 
 1. Place your PartField checkpoint file(s) (e.g., `.ckpt`) in the `ComfyUI/models/PartField` directory (or let the loader node download the default).
@@ -152,7 +182,6 @@ If mesh processing fails:
 You'll need a PartField model checkpoint to use this extension. The `PartField Model (Down)Loader` node will attempt to download a default one. Alternatively, contact NVIDIA or refer to the original PartField repository for information on obtaining other checkpoints.
 
 
-
 ## License
 
 See the LICENSE file for details.
@@ -161,3 +190,8 @@ See the LICENSE file for details.
 
 This project is based on NVIDIA's PartField model. Please see the original paper for more details:
 [PartField: Generalizable 3D Part Segmentation with Radiance Fields](https://nvlabs.github.io/partfield/) 
+
+example images
+![ComfyUI_temp_gxcby_00008_](https://github.com/user-attachments/assets/4e3fbe05-a452-47eb-950b-098b01daadd0)
+![ComfyUI_temp_pyfcy_00001_](https://github.com/user-attachments/assets/368c7260-a3e7-4111-a454-43ffafd7756a)
+![ComfyUI_temp_ptcms_00001_](https://github.com/user-attachments/assets/fb91a8fa-b23e-4136-bd92-1963024938b3)
